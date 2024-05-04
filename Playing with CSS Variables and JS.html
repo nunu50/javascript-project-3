@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript 30</title>
+</head>
+<body>
+    <h1>
+        Update CSS variables with
+        <span class="h1">JS</span>
+    </h1>
+    <div class="controls">
+        <label for="spacing">Sapcing:</label>
+        <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+        <label for="blur" >Blur:</label>
+        <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+        <label for="base">Base color:</label>
+        <input type="color" name="base" value="#efefef">
+    </div>
+    <img src="wave-haikei.png" alt="wave">
+    <style>
+        :root{
+            --spacing:10px;
+            --blur:10px;
+            --base:#ecabde;
+        }
+
+        img{
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+        .h1{
+          color: var(--base);
+        }
+        body{
+            text-align: center;
+            background: rgb(155, 109, 109);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 100;
+            font-size: 50px;
+        }
+        .controls{
+            margin-bottom: 50px;
+        }
+        h1{
+            font-size: larger;
+        }
+    </style>
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+        function handleUpdate(){
+       const suffix = this.dataset.sizing || '';
+       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+        inputs.forEach(inputs => inputs.addEventListener('change', handleUpdate));
+        inputs.forEach(inputs => inputs.addEventListener('mousemove', handleUpdate));
+
+    </script>
+</body>
+</html>
